@@ -1,0 +1,60 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="2" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Weather Status</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+        <tr class="table-dark">
+            <th scope="col">Parameter</th>
+            <th scope="col">Value</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{$water := .Status.Water}}
+        {{$wind := .Status.Wind}}
+        {{if lt $water 5}}
+            <tr class="table-success">
+        {{else if le $water 8}}
+            <tr class="table-warning">
+        {{else if gt $water 8}}
+            <tr class="table-danger">
+        {{end}}
+            <td>Water</td>
+            <td>{{.Status.Water}} m</td>
+            {{if lt $water 5}}
+                <td>Aman</td>
+            {{else if le $water 8}}
+                <td>Siaga</td>
+            {{else if gt $water 8}}
+                <td>Bahaya</td>
+            {{end}}
+        </tr>
+        {{if lt $wind 6}}
+            <tr class="table-success">
+        {{else if le $wind 15}}
+            <tr class="table-warning">
+        {{else if gt $wind 15}}
+            <tr class="table-danger">
+        {{end}}
+            <td>Wind</td>
+            <td>{{.Status.Wind}} m/s</td>
+            {{if lt $wind 6}}
+                <td>Aman</td>
+            {{else if le $wind 15}}
+                <td>Siaga</td>
+            {{else if gt $wind 15}}
+                <td>Bahaya</td>
+            {{end}}
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+{{end}}
